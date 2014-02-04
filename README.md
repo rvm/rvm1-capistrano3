@@ -69,7 +69,7 @@ cap rvm1:install:gems
 
 Or add an before hook:
 ```ruby
-before 'deploy', 'rvm1:install:ruby'  # install/update Ruby
+before 'deploy', 'rvm1:install:gems'  # install/update gems
 ```
 
 Right now all gems in Gemfile will be installed into gemset.

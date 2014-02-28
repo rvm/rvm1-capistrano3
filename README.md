@@ -25,7 +25,6 @@ It will automatically:
 
 - detect rvm installation path, preferring user installation
 - detect ruby from project directory
-- detect Gemfile and use `bundle exec`
 - create the gemset if not existing already
 
 ## Install RVM 1.x

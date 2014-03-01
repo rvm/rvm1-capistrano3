@@ -1,5 +1,20 @@
 #!/usr/bin/env sh
 
+# Prevent existing Ruby environment from affecting a new Ruby run via RVM.
+unset BUNDLE_BIN
+unset BUNDLE_BIN_PATH
+unset BUNDLE_FROZEN
+unset BUNDLE_GEMFILE
+unset BUNDLE_PATH
+unset BUNDLE_WITHOUT
+
+unset GEM_HOME
+unset GEM_PATH
+unset MY_RUBY_HOME
+unset RUBYLIB
+unset RUBYOPT
+unset RUBY_VERSION
+
 rvm_fail()
 {
   echo "$1" >&2

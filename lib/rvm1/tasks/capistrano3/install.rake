@@ -2,7 +2,7 @@ namespace :rvm1 do
   namespace :install do
     desc "Installs RVM 1.x user mode"
     task :rvm do
-      on roles(:all) do
+      on roles(fetch(:rvm1_roles, :all)) do
         execute :mkdir, "-p", "#{fetch(:tmp_dir)}/#{fetch(:application)}/"
         upload! File.expand_path("../../../../../script/install-rvm.sh", __FILE__), "#{fetch(:tmp_dir)}/#{fetch(:application)}/install-rvm.sh"
         execute :chmod, "+x", "#{fetch(:tmp_dir)}/#{fetch(:application)}/install-rvm.sh"
@@ -13,7 +13,7 @@ namespace :rvm1 do
 
     desc "Installs Ruby for the given ruby project"
     task :ruby do
-      on roles(:all) do
+      on roles(fetch(:rvm1_roles, :all)) do
         within fetch(:release_path) do
           execute "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh", "rvm", "install", fetch(:rvm1_ruby_version)
         end
@@ -24,7 +24,7 @@ namespace :rvm1 do
 
     desc "Install gems from Gemfile into gemset using rubygems."
     task :gems do
-      on roles(:all) do
+      on roles(fetch(:rvm1_roles, :all)) do
         within release_path do
           execute :gem, "install", "--file", "Gemfile"
         end

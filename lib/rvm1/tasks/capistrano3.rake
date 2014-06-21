@@ -1,7 +1,7 @@
 namespace :rvm1 do
   desc "Runs the RVM1 hook - use it before any custom tasks if necessary"
   task :hook do
-    on roles(:all) do
+    on roles(fetch(:rvm1_roles, :all)) do
       execute :mkdir, "-p", "#{fetch(:tmp_dir)}/#{fetch(:application)}/"
       upload! File.expand_path("../../../../script/rvm-auto.sh", __FILE__), "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh"
       execute :chmod, "+x", "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh"
@@ -17,7 +17,7 @@ namespace :rvm1 do
 
   desc "Prints the RVM1 and Ruby version on the target host"
   task :check do
-    on roles(:all) do
+    on roles(fetch(:rvm1_roles, :all)) do
       puts capture(:rvm, "version")
       puts capture(:rvm, "list")
       puts capture(:rvm, "current")

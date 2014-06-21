@@ -110,6 +110,14 @@ This is only necessary if your task is *not* *after* the `deploy:starting` task.
 
     before :my_custom_task, 'rvm1:hook'
 
+# Custom Roles: :rvm1_roles
+
+If you want to restrict RVM usage to a subset of roles, you may set `:rvm_roles`:
+
+    set :rvm1_roles, [:rvm]
+
+This can be used to restrict RVM use to only one stage which uses given roles.
+
 ## Contributing
 
 1. Fork it

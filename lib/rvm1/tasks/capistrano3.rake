@@ -7,9 +7,8 @@ namespace :rvm1 do
       execute :chmod, "+x", "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh"
     end
 
-    hosts = SSHKit::Coordinator.new(roles(fetch(:rvm1_roles, :all))).hosts
     if
-      hosts && hosts.any?
+      roles(fetch(:rvm1_roles, :all)).any?
     then
       SSHKit.config.command_map.prefix[:rvm].unshift("#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh")
 

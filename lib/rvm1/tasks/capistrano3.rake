@@ -7,11 +7,16 @@ namespace :rvm1 do
       execute :chmod, "+x", "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh"
     end
 
-    SSHKit.config.command_map.prefix[:rvm].unshift("#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh")
+    hosts = SSHKit::Coordinator.new(roles(fetch(:rvm1_roles, :all))).hosts
+    if
+      hosts && hosts.any?
+    then
+      SSHKit.config.command_map.prefix[:rvm].unshift("#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh")
 
-    rvm_prefix = "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh #{fetch(:rvm1_ruby_version)}"
-    fetch(:rvm1_map_bins).each do |command|
-      SSHKit.config.command_map.prefix[command.to_sym].unshift(rvm_prefix)
+      rvm_prefix = "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh #{fetch(:rvm1_ruby_version)}"
+      fetch(:rvm1_map_bins).each do |command|
+        SSHKit.config.command_map.prefix[command.to_sym].unshift(rvm_prefix)
+      end
     end
   end
 

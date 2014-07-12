@@ -2,17 +2,17 @@ namespace :rvm1 do
   desc "Runs the RVM1 hook - use it before any custom tasks if necessary"
   task :hook do
     on roles(fetch(:rvm1_roles, :all)) do
-      execute :mkdir, "-p", "#{fetch(:tmp_dir)}/#{fetch(:application)}/"
-      upload! File.expand_path("../../../../script/rvm-auto.sh", __FILE__), "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh"
-      execute :chmod, "+x", "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh"
+      execute :mkdir, "-p", "#{fetch(:rvm1_auto_script_path)}/"
+      upload! File.expand_path("../../../../script/rvm-auto.sh", __FILE__), "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh"
+      execute :chmod, "+x", "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh"
     end
 
     if
       roles(fetch(:rvm1_roles, :all)).any?
     then
-      SSHKit.config.command_map.prefix[:rvm].unshift("#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh")
+      SSHKit.config.command_map.prefix[:rvm].unshift("#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh")
 
-      rvm_prefix = "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh #{fetch(:rvm1_ruby_version)}"
+      rvm_prefix = "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh #{fetch(:rvm1_ruby_version)}"
       fetch(:rvm1_map_bins).each do |command|
         SSHKit.config.command_map.prefix[command.to_sym].unshift(rvm_prefix)
       end
@@ -39,6 +39,13 @@ namespace :load do
   task :defaults do
     set :rvm1_ruby_version, "."
     set :rvm1_map_bins, %w{rake gem bundle ruby}
+
+    temp_auto_script_path = "#{fetch(:tmp_dir)}/#{fetch(:application)}"
+    if fetch(:ssh_options) && fetch(:ssh_options)[:user]
+      temp_auto_script_path = "#{temp_auto_script_path}-#{fetch(:ssh_options)[:user]}"
+    end
+
+    set :rvm1_auto_script_path, temp_auto_script_path
   end
 end
 

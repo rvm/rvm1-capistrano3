@@ -118,6 +118,13 @@ If you want to restrict RVM usage to a subset of roles, you may set `:rvm_roles`
 
 This can be used to restrict RVM use to only one stage which uses given roles.
 
+# Custom Path to rvm-auto.sh
+
+By default the `rvm-auto.sh` script will be saved under `/tmp/<application>-<ssh-user>`. To override it, use:
+
+    set :rvm1_auto_script_path, '/tmp/another/dir'
+
+
 ## Contributing
 
 1. Fork it

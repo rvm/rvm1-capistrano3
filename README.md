@@ -62,7 +62,7 @@ it's not recommended to involve this option unless you really understand implica
 Creates alias with the application name for the app ruby:
 
 ```ruby
-before 'deploy', 'rvm1:create:alias'
+before 'deploy', 'rvm1:alias:create'
 ```
 
 To change the alias name use:

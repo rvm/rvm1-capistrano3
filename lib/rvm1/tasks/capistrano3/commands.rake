@@ -34,4 +34,19 @@ namespace :rvm1 do
     before :gems, 'rvm1:hook'
 
   end
+
+  namespace :alias do
+    desc "Create an alias for the given"
+    task :create do
+      on roles(fetch(:rvm1_roles, :all)) do
+        within fetch(:release_path) do
+          execute "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh",
+            fetch(:rvm1_ruby_version), "rvm", "alias", "create",
+            fetch(:rvm1_alias_name), "current"
+        end
+      end
+    end
+    before :create, "deploy:updating"
+    before :create, 'rvm1:hook'
+  end
 end

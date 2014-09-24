@@ -57,6 +57,20 @@ or at least all ruby requirements installed already.
 Please note that `NOPASSWD` can bring security vulnerabilities to your system and
 it's not recommended to involve this option unless you really understand implications of it.
 
+## Create alias
+
+Creates alias with the application name for the app ruby:
+
+```ruby
+before 'deploy', 'rvm1:create:alias'
+```
+
+To change the alias name use:
+
+```ruby
+set :rvm1_alias_name, 'my-alias-name'
+```
+
 ## Install Gems
 
 This task replaces `capistrano-bundler` gem use only one at time

@@ -3,10 +3,10 @@ namespace :rvm1 do
     desc "Installs RVM 1.x user mode"
     task :rvm do
       on roles(fetch(:rvm1_roles, :all)) do
-        execute :mkdir, "-p", "#{fetch(:tmp_dir)}/#{fetch(:application)}/"
-        upload! File.expand_path("../../../../../script/install-rvm.sh", __FILE__), "#{fetch(:tmp_dir)}/#{fetch(:application)}/install-rvm.sh"
-        execute :chmod, "+x", "#{fetch(:tmp_dir)}/#{fetch(:application)}/install-rvm.sh"
-        execute "#{fetch(:tmp_dir)}/#{fetch(:application)}/install-rvm.sh"
+        execute :mkdir, "-p", "#{fetch(:rvm1_auto_script_path)}/"
+        upload! File.expand_path("../../../../../script/install-rvm.sh", __FILE__), "#{fetch(:rvm1_auto_script_path)}/install-rvm.sh"
+        execute :chmod, "+x", "#{fetch(:rvm1_auto_script_path)}/install-rvm.sh"
+        execute "#{fetch(:rvm1_auto_script_path)}/install-rvm.sh"
       end
     end
     before :rvm, 'rvm1:hook'
@@ -15,7 +15,7 @@ namespace :rvm1 do
     task :ruby do
       on roles(fetch(:rvm1_roles, :all)) do
         within fetch(:release_path) do
-          execute "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh", "rvm", "--install", "install", fetch(:rvm1_ruby_version)
+          execute "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh", "rvm", "--install", "install", fetch(:rvm1_ruby_version)
         end
       end
     end
@@ -40,7 +40,7 @@ namespace :rvm1 do
     task :create do
       on roles(fetch(:rvm1_roles, :all)) do
         within fetch(:release_path) do
-          execute "#{fetch(:tmp_dir)}/#{fetch(:application)}/rvm-auto.sh",
+          execute "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh",
             fetch(:rvm1_ruby_version), "rvm", "alias", "create",
             fetch(:rvm1_alias_name), "current"
         end

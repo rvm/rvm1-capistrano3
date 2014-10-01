@@ -40,14 +40,7 @@ namespace :load do
     set :rvm1_ruby_version, "."
     set :rvm1_map_bins, %w{rake gem bundle ruby}
     set :rvm1_alias_name, -> { fetch(:application) }
-
-    set :rvm1_auto_script_path, -> {
-      temp_auto_script_path = "#{fetch(:tmp_dir)}/#{fetch(:application)}"
-      if fetch(:ssh_options) && fetch(:ssh_options)[:user]
-        temp_auto_script_path = "#{temp_auto_script_path}-#{fetch(:ssh_options)[:user]}"
-      end
-      temp_auto_script_path
-    }
+    set :rvm1_auto_script_path, -> { "#{fetch(:deploy_to)}/rvm1scripts}" }
   end
 end
 

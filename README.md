@@ -27,6 +27,23 @@ It will automatically:
 - detect ruby from project directory
 - create the gemset if not existing already
 
+## Security
+
+Please note that for now no automatic installation of PGP keys is done,
+based on this instruction <http://rvm.io/rvm/security> a minimalistic
+task can be added to handle the keys installation:
+
+```ruby
+namespace :app do
+  task :update_rvm_key do
+    execute :gpg, "--keyserver hkp://keys.gnupg.net --recv-keys D39DC0E3"
+  end
+end
+before "rvm1:install:rvm", "app:update_rvm_key"
+```
+replace `:gpg` with `:gpg2` depending on the output from RVM.
+
+
 ## Install RVM 1.x
 
 This task will install stable version of rvm in `$HOME/.rvm`:

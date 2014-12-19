@@ -8,6 +8,7 @@ Add this line to your application's Gemfile:
 
     gem 'rvm1-capistrano3', require: false
 
+You need to run `bundle install` to install the gem.
 
 Or install it yourself as:
 

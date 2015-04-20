@@ -111,6 +111,19 @@ we will improve it with new RG releases.
 - RG 2.2 - limited support for `Gemfile.lock` - work still in progress,
   test with `rvm rubygems head`
 
+## Or using bundler
+
+If you want to use `bundler`,
+
+```bash
+cap rvm1:install:bundler
+```
+
+Or add an after hook:
+```ruby
+after 'rvm1:install:ruby', 'rvm1:install:bundler'  # install bundler
+```
+
 ## Configuration
 
 Well if you really need to there are available ways:

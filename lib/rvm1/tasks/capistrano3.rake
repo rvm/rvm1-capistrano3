@@ -13,7 +13,7 @@ namespace :rvm1 do
       SSHKit.config.command_map.prefix[:rvm].unshift("#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh")
 
       rvm_prefix = "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh #{fetch(:rvm1_ruby_version)}"
-      fetch(:rvm1_map_bins).each do |command|
+      fetch(:rvm_map_bins).each do |command|
         SSHKit.config.command_map.prefix[command.to_sym].unshift(rvm_prefix)
       end
     end
@@ -39,6 +39,7 @@ namespace :load do
   task :defaults do
     set :rvm1_ruby_version, "."
     set :rvm1_map_bins, %w{rake gem bundle ruby}
+    set :rvm_map_bins, -> { fetch(:rvm1_map_bins) }
     set :rvm1_alias_name, -> { fetch(:application) }
     set :rvm1_auto_script_path, -> { "#{fetch(:deploy_to)}/rvm1scripts" }
   end

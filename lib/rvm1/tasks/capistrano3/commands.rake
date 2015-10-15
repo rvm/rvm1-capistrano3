@@ -41,8 +41,8 @@ namespace :rvm1 do
       on roles(fetch(:rvm1_roles, :all)) do
         within fetch(:release_path) do
           execute "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh",
-            fetch(:rvm1_ruby_version), "rvm", "alias", "create",
-            fetch(:rvm1_alias_name), "current"
+            "rvm", "alias", "create",
+            fetch(:rvm1_alias_name), fetch(:rvm1_ruby_version)
         end
       end
     end

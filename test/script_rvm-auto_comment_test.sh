@@ -18,11 +18,11 @@ rvm_path=random $script no_ruby_found # status=102
 ## use ruby from current dir - Gemfile is set to 1.8.7
 $script . ruby -v # match=/1.8.7/
 
-## use rvm to make sure 2.0.0 is installed
-$script rvm install 2.0.0 # status=0
+## use rvm to make sure 2.2.3 is installed
+$script rvm install 2.2.3 # status=0
 
 ## use a ruby
-$script 2.0.0 ruby -v # match=/2.0.0/
+$script 2.2.3 ruby -v # match=/2.2.3/
 
 ## retest current dir ruby still works
 $script . ruby -v # match=/1.8.7/

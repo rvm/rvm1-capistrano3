@@ -46,7 +46,7 @@ fi
 # make sure rvm is installed
 if test -x "${rvm_path:-}/bin/rvm"
 then true
-else rvm_fail "Can not find rvm in '${rvm_path:-}'." 102
+else rvm_fail "Cannot find rvm in '${rvm_path:-}'." 102
 fi
 
 if
@@ -65,6 +65,6 @@ else
     \. "${source_file:-}" &&
     exec "$@"
   else
-    rvm_fail "Can not find ruby for '$ruby_string'." 103
+    rvm_fail "Cannot find ruby for '$ruby_string'." 103
   fi
 fi

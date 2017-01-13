@@ -15,8 +15,8 @@ rvm_path=random $script no_ruby_found # status=102
 
 : proper paths
 
-## use ruby from current dir - Gemfile is set to 1.8.7
-$script . ruby -v # match=/1.8.7/
+## use ruby from current dir - Gemfile is set to 2.2.2
+$script . ruby -v # match=/2.2.2/
 
 ## use rvm to make sure 2.2.3 is installed
 $script rvm install 2.2.3 # status=0
@@ -25,4 +25,4 @@ $script rvm install 2.2.3 # status=0
 $script 2.2.3 ruby -v # match=/2.2.3/
 
 ## retest current dir ruby still works
-$script . ruby -v # match=/1.8.7/
+$script . ruby -v # match=/2.2.2/

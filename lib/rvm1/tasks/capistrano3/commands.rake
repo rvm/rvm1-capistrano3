@@ -33,6 +33,14 @@ namespace :rvm1 do
     before :gems, "deploy:updating"
     before :gems, 'rvm1:hook'
 
+    desc 'Install bundler'
+    task :bundler do
+      on roles(fetch(:rvm1_roles, :all)) do
+        within release_path do
+          execute :rvm, fetch(:rvm1_ruby_version), 'do', 'gem install bundler'
+        end
+      end
+    end
   end
 
   namespace :alias do

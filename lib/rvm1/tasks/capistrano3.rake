@@ -38,6 +38,7 @@ end
 namespace :load do
   task :defaults do
     set :rvm1_ruby_version, "."
+    set :rvm1_ruby_install_options, []
     set :rvm1_map_bins,   -> { fetch(:rvm_map_bins, %w{rake gem bundle ruby}) }
     set :rvm1_alias_name, -> { fetch(:application) }
     set :rvm1_auto_script_path, -> { "#{fetch(:deploy_to)}/rvm1scripts" }

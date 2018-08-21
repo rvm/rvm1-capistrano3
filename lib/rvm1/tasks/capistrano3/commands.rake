@@ -15,7 +15,7 @@ namespace :rvm1 do
     task :ruby do
       on roles(fetch(:rvm1_roles, :all)) do
         within fetch(:release_path) do
-          execute "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh", "rvm", "--install", "install", fetch(:rvm1_ruby_version)
+          execute "#{fetch(:rvm1_auto_script_path)}/rvm-auto.sh", "rvm", "--install", "install", fetch(:rvm1_ruby_version), *fetch(:rvm1_ruby_install_options, [])
         end
       end
     end

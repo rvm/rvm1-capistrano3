@@ -12,10 +12,10 @@ Gem::Specification.new do |spec|
   spec.homepage    = 'https://github.com/rvm/rvm1-capistrano3'
   spec.summary     =
   spec.description = 'RVM 1.x / Capistrano 3.x Integration Gem'
-  spec.license     = 'Apache 2'
+  spec.license     = 'Apache-2.0'
 
   spec.add_dependency 'capistrano', '~>3.0'
-  spec.add_dependency 'sshkit', '>=1.2'
+  spec.add_dependency 'sshkit', '~>1.14'
   spec.add_development_dependency 'tf', '~>0.4.3'
 
   spec.files        = Dir.glob('{lib,script}/**/*.{rb,rake,sh}')

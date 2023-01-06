@@ -39,6 +39,8 @@ then
   then rvm_path="$HOME/.rvm"
   elif test -x  "/usr/local/rvm/bin/rvm"
   then rvm_path="/usr/local/rvm"
+  elif test -x  "/usr/share/rvm/bin/rvm"
+  then rvm_path="/usr/share/rvm"
   else rvm_path="$HOME/.rvm"
   fi
 fi
